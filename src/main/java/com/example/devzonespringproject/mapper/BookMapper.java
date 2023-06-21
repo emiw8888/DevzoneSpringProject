@@ -2,31 +2,23 @@ package com.example.devzonespringproject.mapper;
 
 import com.example.devzonespringproject.dao.entity.BookEntity;
 import com.example.devzonespringproject.model.dto.BookDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-public class BookMapper {
-    public static BookDto mapEntityToDto(BookEntity bookEntity) {
-        return BookDto.builder()
-            .id(bookEntity.getId())
-            .name(bookEntity.getName())
-            .price(bookEntity.getPrice())
-            .build();
-    }
+@Mapper
+public abstract class BookMapper {
+    public static BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
-    public static BookEntity mapDtoToEntity(BookDto bookDto) {
-        return BookEntity.builder()
-            .name(bookDto.getName())
-            .price(bookDto.getPrice())
-            .build();
-    }
+    public abstract BookDto mapEntityToDto(BookEntity bookEntity);
 
-    public static List<BookDto> mapEntitiesToDtos(List<BookEntity> bookEntities) {
-        return bookEntities
-            .stream()
-            .map(BookMapper::mapEntityToDto)
-            .toList();
-    }
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    public abstract BookEntity mapDtoToEntity(BookDto bookDto);
+
+    public abstract List<BookDto> mapEntitiesToDtos(List<BookEntity> bookEntities);
 
 
     public static BookEntity editBookEntity(BookDto bookDto, BookEntity bookEntity) {

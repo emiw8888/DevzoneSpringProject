@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create employee's projects table
+      author: Emil Cahangirli
+      changes:
+        - createTable:
+            tableName: projects
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: id of project
+              - column:
+                  name: name
+                  type: varchar(30)
+                  remarks: name of project
+              - column:
+                  name: employee_id
+                  type: bigint
+                  remarks: project owner
+                  constraints:
+                    - foreignKey:
+                        baseColumnNames: employee_id
+                        baseTableName: projects
+                        referencedColumnNames: id
+                        referencedTableName: employees
+                        constraintName: fk_projects_to_employees
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  remarks: When the record created
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  remarks: When the record updated
+            remarks: Table to store information about books

@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create employees table
+      author: Emil Cahangirli
+      changes:
+        - createTable:
+            tableName: employees
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: id of employee
+              - column:
+                  name: name
+                  type: varchar(20)
+                  remarks: name of employee
+              - column:
+                  name: surname
+                  type: varchar(20)
+                  remarks: surname of employee
+              - column:
+                  name: contact_id
+                  type: bigint
+                  remarks: contacts of employee
+                  constraints:
+                    - foreignKey:
+                        baseColumnNames: contact_id
+                        baseTableName: employees
+                        referencedColumnNames: id
+                        referencedTableName: contacts
+                        constraintName: fk_employees_to_contacts
+              - column:
+                  name: salary_id
+                  type: bigint
+                  remarks: salary of employee
+                  constraints:
+                    - foreignKey:
+                        baseColumnNames: salary_id
+                        baseTableName: employees
+                        referencedColumnNames: id
+                        referencedTableName: salaries
+                        constraintName: fk_employees_to_salaries
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  remarks: When the record created
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  remarks: When the record updated
+            remarks: Table to store information about books

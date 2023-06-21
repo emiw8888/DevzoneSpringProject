@@ -1,5 +1,6 @@
 package com.example.devzonespringproject.dao.entity;
 
+import com.example.devzonespringproject.enums.Currency;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,21 +11,22 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+
 @Entity
-@Table(name = "books")
+@Table(name = "salaries")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class BookEntity {
+public class SalaryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private Integer amount;
 
-    private Double price;
-
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

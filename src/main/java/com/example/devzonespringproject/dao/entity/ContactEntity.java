@@ -10,21 +10,23 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
+
 @Entity
-@Table(name = "books")
+@Table(name = "contacts")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class BookEntity {
+public class ContactEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String email;
 
-    private Double price;
+    private String phoneNumber;
 
+    private String address;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
