@@ -36,6 +36,7 @@ public class ProjectController {
     public void editProject(@RequestBody ProjectDto projectDto,
                             @PathVariable Long id) {
         projectService.editProject(projectDto, id);
+
     }
 
     @DeleteMapping("/{id}")
