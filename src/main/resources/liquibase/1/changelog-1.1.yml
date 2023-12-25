@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: Create employee's salaries table
+      author: Emil Cahangirli
+      changes:
+        - createTable:
+            tableName: salaries
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  remarks: id of salary
+              - column:
+                  name: amount
+                  type: int
+                  remarks: amount of salary
+              - column:
+                  name: currency
+                  type: varchar(8)
+                  remarks: currency of salary
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValue: now()
+                  remarks: When the record created
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  defaultValue: now()
+                  remarks: When the record updated
+            remarks: Table to store information about books

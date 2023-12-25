@@ -1,6 +1,7 @@
 package com.example.devzonespringproject.controller;
 
 import com.example.devzonespringproject.model.dto.BookDto;
+import com.example.devzonespringproject.model.dto.SearchDto;
 import com.example.devzonespringproject.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,11 @@ public class BookController {
     public List<BookDto> getBooks(@RequestParam(defaultValue = "0") Integer pageNo,
                                   @RequestParam(defaultValue = "5") Integer pageSize) {
         return bookService.getBooks(pageNo, pageSize);
+    }
+
+    @GetMapping("/search")
+    public List<BookDto> searchBooks(SearchDto searchDto) {
+        return bookService.searchBooks(searchDto);
     }
 
     @GetMapping("/{id}")

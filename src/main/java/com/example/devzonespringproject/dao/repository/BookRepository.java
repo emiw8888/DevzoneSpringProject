@@ -2,8 +2,10 @@ package com.example.devzonespringproject.dao.repository;
 
 import com.example.devzonespringproject.dao.entity.BookEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BookRepository
-    extends PagingAndSortingRepository<BookEntity, Long>, JpaRepository<BookEntity, Long> {
+    extends JpaRepository<BookEntity, Long> , JpaSpecificationExecutor<BookEntity> {
 }

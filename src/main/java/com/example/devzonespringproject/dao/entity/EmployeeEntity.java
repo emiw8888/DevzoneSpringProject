@@ -9,22 +9,33 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "books")
+@Table(name = "employees")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class BookEntity {
+public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private Double price;
+    private String surname;
 
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
+    @JoinColumn(name = "salary_id")
+    private SalaryEntity salary;
+
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.DETACH})
+    @JoinColumn(name = "contact_id")
+    private ContactEntity contact;
+
+    @OneToMany(mappedBy = "employee")
+    private List<ProjectEntity> projects;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
